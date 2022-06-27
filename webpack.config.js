@@ -1,17 +1,18 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 module.exports = {
   devtool: "inline-source-map",
   entry: {
-    path: path.resolve(__dirname, "index.js"),
+    path: path.resolve(__dirname, "main.js"),
   },
   output: {
     clean: true,
-    filename: "index.[contenthash].js",
+    filename: "main.[contenthash].js",
     path: path.resolve(__dirname, "public"),
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: "index.html", favicon: "favicon.ico" }),
+    new HtmlWebpackPlugin({ template: "main.html", favicon: "favicon.ico" }),
   ],
   module: {
     rules: [
@@ -37,7 +38,7 @@ module.exports = {
   },
   devServer: {
     port: process.env.PORT || 3000,
-    liveReload: true,
+    hot: true,
     open: true,
   },
 };
