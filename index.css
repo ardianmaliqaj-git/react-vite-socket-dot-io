@@ -1,0 +1,29 @@
+:root {
+  --background: #f0f2f5;
+  --foreground: #333333;
+}
+
+#body,
+#body * {
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 40px;
+  margin: 0;
+  padding: 0;
+  flex-direction: row;
+  width: fit-content;
+  height: fit-content;
+  user-select: none;
+}
+
+#body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: var(--foreground);
+  background: var(--background);
+}
