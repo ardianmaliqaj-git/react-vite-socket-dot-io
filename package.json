@@ -1,7 +1,8 @@
 {
   "scripts": {
     "development": "webpack serve --mode development --open",
-    "production": "webpack build --mode production"
+    "production": "webpack build --mode production",
+    "test": "npm run production && cd socket-dot-io && python main.py"
   },
   "dependencies": {
     "react": "^18.2.0",
