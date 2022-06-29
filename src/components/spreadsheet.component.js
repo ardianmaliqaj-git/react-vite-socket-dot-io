@@ -16,6 +16,11 @@ let SpreadsheetComponent = function () {
   return (
     <div className="spreadsheet">
       <div className="container">
+        <div className="nodes">
+          <div className="node">
+            {activeRow + 1}:{activeColumn + 1}
+          </div>
+        </div>
         {[...Array(rows).keys()].map((row) => {
           return (
             <div key={row} className="rows">
@@ -25,7 +30,7 @@ let SpreadsheetComponent = function () {
                     key={column}
                     onMouseDown={() => handleMouseDown(row, column)}
                     className={`columns ${
-                      row == activeRow && column == activeColumn ? "focus" : ""
+                      row === activeRow && column === activeColumn ? "focus" : ""
                     }`}
                   ></div>
                 );

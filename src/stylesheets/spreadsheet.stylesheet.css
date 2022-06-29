@@ -1,5 +1,6 @@
 :root {
   --shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+  --space: 1px;
 }
 
 * {
@@ -10,6 +11,8 @@
   height: fit-content;
   border: none;
   box-sizing: border-box;
+  color: var(--foreground);
+  font-size: 15px;
 }
 
 .spreadsheet {
@@ -22,6 +25,26 @@
 .container {
   display: flex;
   flex-direction: column;
+  padding: var(--space);
+}
+
+.nodes {
+  display: flex;
+  width: auto;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  margin: var(--space);
+  box-sizing: border-box;
+  padding: 31px 0px;
+}
+
+.node {
+  background: var(--background);
+  width: fit-content;
+  padding: 2px 7px;
+  margin-right: 5px;
+  letter-spacing: 2px;
 }
 
 .rows {
@@ -31,8 +54,8 @@
 
 .columns {
   width: 87px;
-  height: 25px;
-  margin: 1px;
+  height: 19pt;
+  margin: var(--space);
   border: 1px solid var(--border-color);
 }
 
