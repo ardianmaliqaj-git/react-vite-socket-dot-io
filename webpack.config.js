@@ -1,6 +1,9 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const prompt = require("prompt-sync")();
+let folder = prompt("Any specific folder?: ");
+
 module.exports = {
   devtool: "inline-source-map",
   entry: {
@@ -9,7 +12,7 @@ module.exports = {
   output: {
     clean: true,
     filename: "main.[contenthash].js",
-    path: path.resolve(__dirname, "public"),
+    path: path.resolve(__dirname, folder || "public"),
   },
   plugins: [
     new HtmlWebpackPlugin({ template: "main.html", favicon: "favicon.ico" }),

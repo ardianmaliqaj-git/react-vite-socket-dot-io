@@ -4,7 +4,7 @@
       "module-resolver",
       {
         "alias": {
-          "^~/stylesheets": "./main.css",
+          "^~/styles": "./main.css",
           "^~/components/(.+)": "./src/components/\\1.component.js",
           "^~/stylesheets/(.+)": "./src/stylesheets/\\1.stylesheet.css"
         }

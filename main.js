@@ -1,14 +1,12 @@
-import "~/stylesheets";
+import "~/styles";
 
-import HelloComponent from "~/components/hello";
+import SpreadsheetComponent from "~/components/spreadsheet";
 
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-ReactDOM.createRoot(
-  document.getElementById("root")
-  ).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <HelloComponent />
+    <SpreadsheetComponent />
   </React.StrictMode>
 );

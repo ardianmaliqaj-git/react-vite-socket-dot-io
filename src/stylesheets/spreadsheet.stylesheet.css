@@ -1,0 +1,42 @@
+:root {
+  --shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  height: 30px;
+  width: fit-content;
+  height: fit-content;
+  border: none;
+  box-sizing: border-box;
+}
+
+.spreadsheet {
+  background-color: var(--facebook-background);
+  padding: 10px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.rows {
+  display: flex;
+  flex-direction: row;
+}
+
+.columns {
+  width: 87px;
+  height: 25px;
+  margin: 1px;
+  border: 1px solid var(--border-color);
+}
+
+.focus {
+  border: 1px solid var(--facebook);
+  border-width: 2px;
+}
