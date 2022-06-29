@@ -1,8 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-console.log(path.resolve(__dirname, "socket-dot-io", "public"));
-
 module.exports = (_, argv) => {
   return {
     devtool: "inline-source-map",
