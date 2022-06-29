@@ -16,7 +16,7 @@
   background-color: var(--facebook-background);
   padding: 10px;
   box-shadow: var(--shadow);
-  cursor: pointer;
+  cursor: default;
 }
 
 .container {
