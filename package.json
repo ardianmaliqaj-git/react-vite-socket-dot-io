@@ -23,10 +23,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ardianmaliqaj-git/react-webpack.git"
+    "url": "git+https://github.com/ardianmaliqaj-git/react.git"
   },
   "bugs": {
-    "url": "https://github.com/ardianmaliqaj-git/react-webpack/issues"
+    "url": "https://github.com/ardianmaliqaj-git/react/issues"
   },
-  "homepage": "https://github.com/ardianmaliqaj-git/react-webpack#readme"
+  "homepage": "https://github.com/ardianmaliqaj-git/react#readme"
 }

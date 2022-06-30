@@ -1,21 +1,26 @@
-import "../stylesheets/spreadsheet.stylesheet.css";
+import "./spreadsheet.stylesheets.css";
 
-import React, { useEffect, useState } from "react";
-import { useClientRect, useKeyCode } from "../hooks/client.rect.usehook";
+import { useEffect, useState } from "react";
+import { useClientRect, useKeyCode } from "./spreadsheet.hooks";
 
 let SpreadsheetComponent = function () {
 
   let [rows] = useState(17);
   let [columns] = useState(13);
 
-  let [focusRow, focusOnRow] = useState();
-  let [focusColumn, focusOnColumn] = useState();
+  let [focusRow, focusOnRow] = useState(0);
+  let [focusColumn, focusOnColumn] = useState(0);
   let [hoverRow, hoverOnRow] = useState(0);
   let [hoverColumn, hoverOnColumn] = useState(0);
 
-  let [{ top, left, right, bottom }, setRef] = useClientRect();
+  let [ref, setRef] = useClientRect();
 
-  let [code, eachEvent] = useKeyCode();
+  let meta = {
+    onEventType: "keydown",
+    onKeyCodeEvents: ["ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"],
+  };
+
+  let [code, time] = useKeyCode(meta);
 
   useEffect(() => {
     switch (code) {
@@ -32,11 +37,12 @@ let SpreadsheetComponent = function () {
         focusOnColumn(Math.abs(focusColumn - 1 + columns) % columns);
         break;
     }
-  }, [eachEvent]);
+  }, [time]);
 
-  let getMousePosition = function ({ clientX, clientY }) {
-    let x = Math.abs((clientY - top) / (bottom - top));
-    let y = Math.abs((clientX - left) / (right - left));
+  let getMousePosition = function (event) {
+    let { top, left, right, bottom } = ref;
+    let x = Math.abs((event.clientY - top) / (bottom - top));
+    let y = Math.abs((event.clientX - left) / (right - left));
     return [x, y];
   };
 
@@ -52,6 +58,14 @@ let SpreadsheetComponent = function () {
     hoverOnColumn(Math.floor(y * columns));
   };
 
+  useEffect(
+    function () {
+      hoverOnRow(focusRow);
+      hoverOnColumn(focusColumn);
+    },
+    [focusRow, focusColumn]
+  );
+
   return (
     <div className="spreadsheet">
       <div className="nodes">
@@ -60,10 +74,10 @@ let SpreadsheetComponent = function () {
         </div>
       </div>
       <div className="container" ref={setRef} onMouseDown={setFocusPosition}>
-        {[...Array(rows).keys()].map((row) => {
+        {[...Array(rows).keys()].map(function (row) {
           return (
             <div key={row} className="rows">
-              {[...Array(columns).keys()].map((column) => {
+              {[...Array(columns).keys()].map(function (column) {
                 return (
                   <div
                     key={column}
@@ -82,4 +96,4 @@ let SpreadsheetComponent = function () {
   );
 };
 
-export default React.memo(SpreadsheetComponent);
+export default SpreadsheetComponent;

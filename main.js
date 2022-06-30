@@ -1,6 +1,6 @@
 import "./main.css";
 
-import SpreadsheetComponent from "./src/components/spreadsheet.component.js";
+import SpreadsheetComponent from "./src/spreadsheet.components.js";
 
 import React from "react";
 import ReactDOM from "react-dom/client";
