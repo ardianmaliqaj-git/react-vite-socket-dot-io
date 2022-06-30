@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 
 let useClientRect = () => {
+
   let element = useRef();
   let [rect, setRect] = useState({});
 
@@ -18,4 +19,22 @@ let useClientRect = () => {
   return [rect, element];
 };
 
-export default useClientRect;
+let useKeyCode = (eventType) => {
+
+  let [code, setCode] = useState();
+  let [time, setTime] = useState();
+
+  useEffect(() => {
+    let updateCode = (event) => {
+      setCode(event?.code);
+      setTime(event?.timeStamp);
+    };
+    updateCode();
+    window.addEventListener(eventType ?? "keydown", updateCode);
+    return () => window.removeEventListener(eventType ?? "keydown", updateCode);
+  }, [eventType]);
+
+  return [code, time];
+};
+
+export { useClientRect, useKeyCode };

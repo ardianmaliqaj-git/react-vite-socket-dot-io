@@ -1,32 +1,55 @@
-import React, { useState } from "react";
-import useClientRect from "../hooks/client.rect.use.hook";
 import "../stylesheets/spreadsheet.stylesheet.css";
 
+import React, { useEffect, useState } from "react";
+import { useClientRect, useKeyCode } from "../hooks/client.rect.usehook";
+
 let SpreadsheetComponent = function () {
+
   let [rows] = useState(17);
   let [columns] = useState(13);
-  let [focusRow, setFocusRow] = useState();
-  let [focusColumn, setFocusColumn] = useState();
-  let [hoverRow, setHoverRow] = useState(0);
-  let [hoverColumn, setHoverColumn] = useState(0);
+
+  let [focusRow, focusOnRow] = useState();
+  let [focusColumn, focusOnColumn] = useState();
+  let [hoverRow, hoverOnRow] = useState(0);
+  let [hoverColumn, hoverOnColumn] = useState(0);
 
   let [{ top, left, right, bottom }, setRef] = useClientRect();
-  let calcMousePosition = function ({ clientX, clientY }) {
+
+  let [code, eachEvent] = useKeyCode();
+
+  useEffect(() => {
+    switch (code) {
+      case "ArrowDown":
+        focusOnRow(Math.abs(focusRow + 1 + rows) % rows);
+        break;
+      case "ArrowUp":
+        focusOnRow(Math.abs(focusRow - 1 + rows) % rows);
+        break;
+      case "ArrowRight":
+        focusOnColumn(Math.abs(focusColumn + 1 + columns) % columns);
+        break;
+      case "ArrowLeft":
+        focusOnColumn(Math.abs(focusColumn - 1 + columns) % columns);
+        break;
+    }
+  }, [eachEvent]);
+
+  let getMousePosition = function ({ clientX, clientY }) {
     let x = Math.abs((clientY - top) / (bottom - top));
     let y = Math.abs((clientX - left) / (right - left));
     return [x, y];
   };
 
   let setFocusPosition = function (event) {
-    let [x, y] = calcMousePosition(event);
-    setFocusRow(Math.floor(x * rows));
-    setFocusColumn(Math.floor(y * columns));
+    let [x, y] = getMousePosition(event);
+    focusOnRow(Math.floor(x * rows));
+    focusOnColumn(Math.floor(y * columns));
   };
 
   let setHoverPosition = function (event) {
-    let [x, y] = calcMousePosition(event);
-    setHoverRow(Math.floor(x * rows));
-    setHoverColumn(Math.floor(y * columns));
+    let [x, y] = getMousePosition(event);
+    hoverOnRow(Math.floor(x * rows));
+    hoverOnColumn(Math.floor(y * columns));
   };
 
   return (
