@@ -19,13 +19,13 @@
   background-color: var(--facebook-background);
   padding: 10px;
   box-shadow: var(--shadow);
-  cursor: default;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   padding: var(--space);
+  cursor: pointer;
 }
 
 .nodes {
