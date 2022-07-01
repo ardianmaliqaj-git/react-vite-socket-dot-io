@@ -4,15 +4,18 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   devtool: "inline-source-map",
   entry: {
-    path: path.resolve(__dirname, "main.js"),
+    path: path.resolve(__dirname, "./src/main.js/"),
   },
   output: {
     clean: true,
     filename: "main.[contenthash].js",
-    path: path.resolve(__dirname, "socket-dot-io", "public"),
+    path: path.resolve(__dirname, "./socket-dot-io/public/"),
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: "main.html", favicon: "favicon.ico" }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "./src/main.html/"),
+      favicon: path.resolve(__dirname, "./src/favicon.ico/"),
+    }),
   ],
   module: {
     rules: [

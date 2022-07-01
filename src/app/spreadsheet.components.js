@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useClientRect, useKeyCode } from "./spreadsheet.hooks";
 
 let SpreadsheetComponent = function () {
-
   let [rows] = useState(17);
   let [columns] = useState(13);
 
