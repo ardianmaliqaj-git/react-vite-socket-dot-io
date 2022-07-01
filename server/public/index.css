@@ -1,4 +1,31 @@
 :root {
+  --background: #f0f2f5;
+  --foreground: #333333;
+  --border-color: #dddfe2;
+  --facebook-background: #fff;
+  --facebook: #1876f2;
+}
+
+html,
+.body,
+.root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background: var(--background);
+}
+
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "JetBrains Mono";
+  font-size: 12px;
+}
+
+:root {
   --shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
   --space: 1px;
 }

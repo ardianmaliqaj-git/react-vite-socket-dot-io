@@ -1,4 +1,4 @@
-import "./main.css";
+import "./index.css";
 
 import SpreadsheetComponent from "./app/spreadsheet.components.js";
 
