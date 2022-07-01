@@ -1,31 +1,41 @@
-import path from "path";
-
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 
-import serve from "rollup-plugin-serve";
-import livereload from "rollup-plugin-livereload";
 import babel from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import replace from "@rollup/plugin-replace";
+
+import cleaner from "rollup-plugin-cleaner";
+import copy from "rollup-plugin-copy";
 import css from "rollup-plugin-import-css";
 import htmlTemplate from "rollup-plugin-generate-html-template";
-import cleaner from "rollup-plugin-cleaner";
+import livereload from "rollup-plugin-livereload";
+import outputManifest from "rollup-plugin-output-manifest";
+import serve from "rollup-plugin-serve";
 
 export default {
-  input: path.join("src", "index.js"),
+  input: "./src/index.js/",
   output: {
-    file: path.join("server", "public", "index.js"),
+    file: "./server/public/index.js/",
     format: "iife",
     sourcemap: true,
   },
   plugins: [
     css(),
+    outputManifest(),
     htmlTemplate({
-      template: path.join("src", "index.html"),
+      template: "./src/index.html/",
       target: "index.html",
     }),
     cleaner({
-      targets: [path.join("server", "public")],
+      targets: ["./server/public/"],
+    }),
+    copy({
+      targets: [
+        {
+          src: "./src/favicon.ico",
+          dest: "./server/public",
+        },
+      ],
     }),
     nodeResolve({
       extensions: [".js"],
@@ -50,7 +60,7 @@ export default {
     serve({
       open: true,
       verbose: true,
-      contentBase: path.join("server", "public"),
+      contentBase: "./server/public/",
       host: "localhost",
       port: 10001,
     }),
