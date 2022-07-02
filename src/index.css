@@ -1,6 +1,9 @@
 :root {
   --background: #f0f2f5;
   --foreground: #333333;
+  --facebook: #1877f2;
+  --facebook-opacity: #1877f21a;
+  --facebook-background: #ffffff;
   --border-color: #dddfe2;
 }
 

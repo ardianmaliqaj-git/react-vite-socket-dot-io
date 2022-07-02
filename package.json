@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "development": "webpack --mode development",
-    "production": "webpack --mode production"
+    "development": "webpack serve --mode development",
+    "production": "webpack build --mode production"
   },
   "dependencies": {
     "react": "^18.2.0",

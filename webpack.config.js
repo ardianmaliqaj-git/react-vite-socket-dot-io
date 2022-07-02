@@ -1,8 +1,8 @@
 const path = require("path");
+
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-module.exports = function (environment) {
-  console.log(environment);
+module.exports = (env) => {
   return {
     devtool: "inline-source-map",
     entry: {
@@ -42,6 +42,6 @@ module.exports = function (environment) {
         },
       ],
     },
-    devServer: { port: 3000 },
+    devServer: { port: 3000, open: true },
   };
 };
