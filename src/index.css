@@ -7,20 +7,16 @@
   --border-color: #dddfe2;
 }
 
-* {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-}
-
-html,
-.body,
 .root {
+  position: absolute;
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   display: flex;
   background: var(--background);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
 .root {
