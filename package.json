@@ -1,7 +1,8 @@
 {
   "scripts": {
     "client": "webpack serve --mode development",
-    "server": "webpack build --mode production && cd server && python index.py"
+    "server": "webpack build --mode production && cd server && python index.py",
+    "heroku": "cd server && git add . && git commit --amend --no-edit && git push heroku master --force && heroku"
   },
   "dependencies": {
     "react": "^18.2.0",
