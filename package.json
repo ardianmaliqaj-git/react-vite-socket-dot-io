@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "development": "rollup --config rollup.config.js --watch"
+    "development": "rollup --config rollup.config.js --watch --environment NODE_ENV:development",
+    "production": "rollup --config rollup.config.js --environment NODE_ENV:production",
+    "test-production": "npm run production && cd server && python index.py"
   },
   "dependencies": {
     "react": "^18.2.0",

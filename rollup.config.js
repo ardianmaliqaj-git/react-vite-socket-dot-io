@@ -12,6 +12,9 @@ import livereload from "rollup-plugin-livereload";
 import outputManifest from "rollup-plugin-output-manifest";
 import serve from "rollup-plugin-serve";
 
+const NODE_ENV = process.env.NODE_ENV || "development";
+console.log(NODE_ENV);
+
 export default {
   input: "./src/index.js/",
   output: {
@@ -41,7 +44,7 @@ export default {
       extensions: [".js"],
     }),
     replace({
-      "process.env.NODE_ENV": JSON.stringify("development"),
+      "process.env.NODE_ENV": JSON.stringify(NODE_ENV),
       preventAssignment: true,
     }),
     babel({
@@ -57,15 +60,17 @@ export default {
       extensions: [".js", ".html"],
     }),
     commonjs(),
-    serve({
-      open: true,
-      verbose: true,
-      contentBase: "./server/public/",
-      host: "localhost",
-      port: 10001,
-    }),
-    livereload({
-      watch: "public",
-    }),
+    NODE_ENV === "development" &&
+      serve({
+        open: true,
+        verbose: true,
+        contentBase: "./server/public/",
+        host: "localhost",
+        port: 10001,
+      }),
+    NODE_ENV === "development" &&
+      livereload({
+        watch: "public",
+      }),
   ],
 };
