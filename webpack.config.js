@@ -1,6 +1,7 @@
 const path = require("path");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (env) => {
   return {
@@ -13,13 +14,6 @@ module.exports = (env) => {
       filename: "index.[contenthash].js",
       clean: true,
     },
-    plugins: [
-      new HtmlWebpackPlugin({
-        title: "Production",
-        template: path.resolve(__dirname, "src", "index.html"),
-        favicon: path.resolve(__dirname, "src", "favicon.ico"),
-      }),
-    ],
     module: {
       rules: [
         {
@@ -36,12 +30,23 @@ module.exports = (env) => {
           },
         },
         {
-          test: /\.css$/,
-          exclude: /node-moudles/,
-          use: ["style-loader", "css-loader"],
+          test: /\.s?css$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            { loader: "css-loader", options: { sourceMap: true } },
+            { loader: "sass-loader", options: { sourceMap: true } },
+          ],
         },
       ],
     },
+    plugins: [
+      new HtmlWebpackPlugin({
+        title: "Production",
+        template: path.resolve(__dirname, "src", "index.html"),
+        favicon: path.resolve(__dirname, "src", "favicon.ico"),
+      }),
+      new MiniCssExtractPlugin({ filename: "index.[contenthash].css" }),
+    ],
     devServer: { port: 3000, open: true },
   };
 };
