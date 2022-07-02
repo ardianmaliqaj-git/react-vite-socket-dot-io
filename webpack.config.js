@@ -2,10 +2,10 @@ const path = require("path");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
-module.exports = (env) => {
+module.exports = () => {
   return {
-    devtool: "inline-source-map",
     entry: {
       path: path.resolve(__dirname, "src", "index.js"),
     },
@@ -33,8 +33,8 @@ module.exports = (env) => {
           test: /\.s?css$/,
           use: [
             MiniCssExtractPlugin.loader,
-            { loader: "css-loader", options: { sourceMap: true } },
-            { loader: "sass-loader", options: { sourceMap: true } },
+            { loader: "css-loader", options: { sourceMap: false } },
+            { loader: "sass-loader", options: { sourceMap: false } },
           ],
         },
       ],
@@ -47,6 +47,19 @@ module.exports = (env) => {
       }),
       new MiniCssExtractPlugin({ filename: "index.[contenthash].css" }),
     ],
+    optimization: {
+      minimize: true,
+      minimizer: [
+        new TerserPlugin({
+          extractComments: false,
+          terserOptions: {
+            format: {
+              comments: false,
+            },
+          },
+        }),
+      ],
+    },
     devServer: { port: 3000, open: true },
   };
 };

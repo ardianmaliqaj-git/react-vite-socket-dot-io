@@ -17,17 +17,16 @@ let useClientRect = function () {
   return [rect, element];
 };
 
-let useKeyCode = function (metaData) {
+let useKeyCode = function (onEventType, onKeyCodeEvents) {
   let [code, setCode] = useState();
   let [change, causeChange] = useState();
   useEffect(function () {
     let updateCode = function (e) {
-      let list = metaData?.onKeyCodeEvents;
-      if (list?.length && !list.includes(e?.code)) return;
+      if (onKeyCodeEvents?.length && !onKeyCodeEvents.includes(e?.code)) return;
       setCode(e?.code);
       causeChange(e?.timeStamp);
     };
-    let type = metaData?.onEventType ?? "keydown";
+    let type = onEventType ?? "keydown";
     window.addEventListener(type, updateCode);
     updateCode();
     return () => window.removeEventListener(type, updateCode);

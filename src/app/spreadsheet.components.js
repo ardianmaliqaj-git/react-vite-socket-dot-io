@@ -14,12 +14,7 @@ let SpreadsheetComponent = function () {
 
   let [ref, setRef] = useClientRect();
 
-  let meta = {
-    onEventType: "keydown",
-    onKeyCodeEvents: ["ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"],
-  };
-
-  let [code, time] = useKeyCode(meta);
+  let [code, time] = useKeyCode("keydown", ["ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"]);
 
   useEffect(() => {
     switch (code) {
