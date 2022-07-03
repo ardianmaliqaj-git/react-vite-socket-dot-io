@@ -8,7 +8,7 @@
     "preview": "vite preview",
     "server": "cd server && python index.py",
     "heroku": "cd server && git add . && git commit --amend --no-edit && git push heroku master --force && heroku open",
-    "explorer": "source-map-explorer ./server/public/**/*.js"
+    "graph": "source-map-explorer server/static/**/*.js"
   },
   "dependencies": {
     "react": "^18.0.0",

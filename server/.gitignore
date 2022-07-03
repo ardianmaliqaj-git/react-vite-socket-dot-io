@@ -1,1 +1,5 @@
+#  modules
 /venv/*
+
+#  development files
+**/*.map
