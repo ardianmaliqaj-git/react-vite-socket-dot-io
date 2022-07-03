@@ -1,12 +1,12 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-export default defineConfig((env) => {
+export default defineConfig(function (env) {
   return {
     plugins: [react()],
     build: {
       outDir: "./server/static/",
-      sourcemap: env.mode == "production" ? false : true,
+      sourcemap: env.mode == "development",
       emptyOutDir: true,
       minify: true,
       rollupOptions: {

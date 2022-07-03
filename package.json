@@ -3,10 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "serve": "vite serve",
-    "development": "vite build --watch --mode development",
-    "production": "vite build --watch --mode production",
-    "explore": "source-map-explorer server/static/**/*.js --no-border-checks"
+    "client": "vite serve",
+    "server": "vite build --mode production && cd server && python index.py",
+    "explore": "vite build --mode development && source-map-explorer server/static/**/*.js --no-border-checks",
+    "heroku": "cd server && git add . && git commit --amend --no-edit && git push heroku master --force && heroku open"
   },
   "dependencies": {
     "react": "^18.0.0",
