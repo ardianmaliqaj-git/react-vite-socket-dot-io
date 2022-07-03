@@ -6,9 +6,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = () => {
   return {
-    entry: {
-      path: path.resolve(__dirname, "src", "index.js"),
-    },
+    entry: "./src/index.js",
     output: {
       path: path.resolve(__dirname, "server", "public"),
       filename: "index.[contenthash].js",
@@ -33,8 +31,8 @@ module.exports = () => {
           test: /\.s?css$/,
           use: [
             MiniCssExtractPlugin.loader,
-            { loader: "css-loader", options: { sourceMap: false } },
-            { loader: "sass-loader", options: { sourceMap: false } },
+            { loader: "css-loader" },
+            { loader: "sass-loader" },
           ],
         },
       ],
@@ -42,10 +40,12 @@ module.exports = () => {
     plugins: [
       new HtmlWebpackPlugin({
         title: "Production",
-        template: path.resolve(__dirname, "src", "index.html"),
-        favicon: path.resolve(__dirname, "src", "favicon.ico"),
+        template: "./src/index.html",
+        favicon: "./src/favicon.ico",
       }),
-      new MiniCssExtractPlugin({ filename: "index.[contenthash].css" }),
+      new MiniCssExtractPlugin({
+        filename: "index.[contenthash].css",
+      }),
     ],
     optimization: {
       minimize: true,
