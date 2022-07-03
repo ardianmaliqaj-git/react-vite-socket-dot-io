@@ -1,7 +1,7 @@
 import socketio, uvicorn
 
 sio = socketio.AsyncServer(async_mode='asgi')
-app = socketio.ASGIApp(sio, static_files={ "/": "./public/" })
+app = socketio.ASGIApp(sio, static_files={ "/": "./static/" })
 
 @sio.event
 async def connect(sid, environ):
