@@ -7,6 +7,8 @@
   --border-color: #dddfe2;
 }
 
+html,
+body,
 .root {
   position: absolute;
   margin: 0;

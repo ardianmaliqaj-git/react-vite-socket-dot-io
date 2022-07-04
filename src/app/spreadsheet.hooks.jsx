@@ -1,37 +1,47 @@
 import { useState, useRef, useEffect } from "react";
 
 let useClientRect = function () {
-  let element = useRef();
+  let setClient = useRef();
   let [rect, setRect] = useState({});
 
   useEffect(function () {
-    let updateRect = function () {
+    let callback = function () {
       let { top, left, right, bottom } =
-        element.current.getBoundingClientRect();
-      setRect(element && element.current ? { top, left, right, bottom } : {});
+        setClient.current.getBoundingClientRect();
+      setRect(
+        setClient && setClient.current ? { top, left, right, bottom } : {}
+      );
     };
-    updateRect();
-    window.addEventListener("resize", updateRect);
-    return () => window.removeEventListener("resize", updateRect);
+    callback();
+    window.addEventListener("resize", callback);
+    return () => window.removeEventListener("resize", callback);
   }, []);
-  return [rect, element];
+  return [rect, setClient];
 };
 
-let useKeyCode = function (onEventType, onKeyCodeEvents) {
+let useDisableContextMenu = function (client) {
+  useEffect(function () {
+    client.addEventListener("contextmenu", (e) => e.preventDefault());
+    return () =>
+      client.removeEventListener("contextmenu", (e) => e.preventDefault());
+  }, []);
+};
+
+let useKeyCode = function (onEventType) {
   let [code, setCode] = useState();
   let [change, causeChange] = useState();
   useEffect(function () {
-    let updateCode = function (e) {
-      if (onKeyCodeEvents?.length && !onKeyCodeEvents.includes(e?.code)) return;
+    let callback = function (e) {
+      e?.preventDefault();
+      e?.stopPropagation();
       setCode(e?.code);
       causeChange(e?.timeStamp);
     };
-    let type = onEventType ?? "keydown";
-    window.addEventListener(type, updateCode);
-    updateCode();
-    return () => window.removeEventListener(type, updateCode);
+    window.addEventListener(onEventType, callback);
+    callback();
+    return () => window.removeEventListener(onEventType, callback);
   }, []);
   return [code, change];
 };
 
-export { useClientRect, useKeyCode };
+export { useClientRect, useKeyCode, useDisableContextMenu };

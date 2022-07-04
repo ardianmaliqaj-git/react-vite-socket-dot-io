@@ -1,7 +1,11 @@
 import "./spreadsheet.stylesheets.css";
 
 import { useEffect, useState } from "react";
-import { useClientRect, useKeyCode } from "./spreadsheet.hooks";
+import {
+  useClientRect,
+  useDisableContextMenu,
+  useKeyCode,
+} from "./spreadsheet.hooks";
 
 let SpreadsheetComponent = function () {
   let [rows] = useState(17);
@@ -12,9 +16,9 @@ let SpreadsheetComponent = function () {
   let [hoverRow, hoverOnRow] = useState(0);
   let [hoverColumn, hoverOnColumn] = useState(0);
 
-  let [ref, setRef] = useClientRect();
-
-  let [code, time] = useKeyCode("keydown", ["ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"]);
+  let [rect, setClient] = useClientRect();
+  let [code, getEachKeyEvent] = useKeyCode("keydown");
+  // useDisableContextMenu(setClient);
 
   useEffect(() => {
     switch (code) {
@@ -31,10 +35,10 @@ let SpreadsheetComponent = function () {
         focusOnColumn(Math.abs(focusColumn - 1 + columns) % columns);
         break;
     }
-  }, [time]);
+  }, [getEachKeyEvent]);
 
   let getMousePosition = function (event) {
-    let { top, left, right, bottom } = ref;
+    let { top, left, right, bottom } = rect;
     let x = Math.abs((event.clientY - top) / (bottom - top));
     let y = Math.abs((event.clientX - left) / (right - left));
     return [x, y];
@@ -61,13 +65,13 @@ let SpreadsheetComponent = function () {
   );
 
   return (
-    <div className="spreadsheet">
+    <div className="spreadsheet" onContextMenu={(e)=> e.preventDefault()}>
       <div className="nodes">
         <div className="node">
           {hoverRow + 1}:{hoverColumn + 1}
         </div>
       </div>
-      <div className="container" ref={setRef} onMouseDown={setFocusPosition}>
+      <div className="container" ref={setClient} onMouseDown={setFocusPosition}>
         {[...Array(rows).keys()].map(function (row) {
           return (
             <div key={row} className="rows">
